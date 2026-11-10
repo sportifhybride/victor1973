@@ -1,0 +1,28 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Administration</title><meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="style.css">
+<style>.adm td,.adm th{font-size:13px;padding:8px 6px;vertical-align:top}.adm button{padding:6px 10px;margin:2px;cursor:pointer}.adm{overflow-x:auto}</style></head><body>
+<main class="wrap legal-page" style="max-width:1200px">
+<div class="eyebrow">PRIVE</div><h1 style="font-size:40px">COMMANDES</h1>
+<div id="login"><p class="muted">Entre ta clé d'administration (elle n'est jamais enregistrée dans le navigateur).</p>
+<input id="key" type="password" placeholder="Clé d'administration" style="max-width:420px"><div class="buttons"><button class="btn" id="go" type="button">ENTRER</button></div><p class="mini" id="err"></p></div>
+<div id="panel" hidden><div class="buttons"><button class="btn alt" id="refresh" type="button">ACTUALISER</button></div>
+<div class="adm"><table class="orders-table" style="width:100%"><thead><tr><th>Réf.</th><th>Date</th><th>Produit</th><th>Prix</th><th>Moyen</th><th>Client</th><th>Statut</th><th>Action</th></tr></thead><tbody id="rows"></tbody></table></div></div>
+</main>
+<script>
+(function(){
+  var KEY='';
+  var $=function(i){return document.getElementById(i)};
+  function esc(t){return String(t==null?'':t).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function call(p,b){b=b||{};b.key=KEY;return fetch(p,{method:'POST',credentials:'same-origin',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||'Erreur');return d})})}
+  function load(){call('/api/admin/orders').then(function(d){
+    $('login').hidden=true;$('panel').hidden=false;
+    $('rows').innerHTML=d.orders.map(function(o){
+      var cl=esc((o.client_prenom||'')+' '+(o.client_nom||''))+'<br>'+esc(o.client_email||'')+'<br>'+esc(o.client_tel||'')+(o.user_id?'<br><i>(compte)</i>':'');
+      return '<tr><td>'+esc(o.ref)+'</td><td>'+esc(o.created_at)+'</td><td>'+esc(o.produit)+'</td><td>'+o.prix_eur+' €</td><td>'+esc(o.methode||'-')+'</td><td>'+cl+'</td><td><b>'+esc(o.status)+'</b>'+(o.paid_at?'<br>'+esc(o.paid_at):'')+'</td>'
+        +'<td><button data-id="'+o.id+'" data-st="payee">Payée ✓</button><button data-id="'+o.id+'" data-st="en_attente">En attente</button><button data-id="'+o.id+'" data-st="annulee">Annuler</button></td></tr>';
+    }).join('')||'<tr><td colspan="8">Aucune commande.</td></tr>';
+  }).catch(function(e){$('err').textContent=e.message})}
+  $('go').onclick=function(){KEY=$('key').value.trim();$('key').value='';$('err').textContent='';load()};
+  $('refresh').onclick=load;
+  $('rows').onclick=function(e){var b=e.target.closest('button');if(!b)return;call('/api/admin/mark',{id:b.dataset.id,status:b.dataset.st}).then(load).catch(function(x){alert(x.message)})};
+})();
+</script></body></html>

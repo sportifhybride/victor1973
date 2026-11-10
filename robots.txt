@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /compte
+Disallow: /espace
+Disallow: /bibliotheque
+Disallow: /admin
+
+Sitemap: https://sportifhybride.com/sitemap.xml

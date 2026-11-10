@@ -1,0 +1,71 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Outils : calcul 1RM et zones de course | Sportif Hybride - Victor Castillo</title><meta name="description" content="Calculateur de 1RM, zones d'allure de course et suivi de tes records personnels."><link rel="stylesheet" href="style.css"><link rel="canonical" href="https://sportifhybride.com/outils">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hybride Coaching - Sportif Hybride">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Outils : calcul 1RM et zones de course | Sportif Hybride - Victor Castillo">
+<meta property="og:description" content="Calculateur de 1RM, zones d'allure de course et suivi de tes records personnels.">
+<meta property="og:url" content="https://sportifhybride.com/outils">
+<meta property="og:image" content="https://sportifhybride.com/assets/hero.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Outils : calcul 1RM et zones de course | Sportif Hybride - Victor Castillo">
+<meta name="twitter:description" content="Calculateur de 1RM, zones d'allure de course et suivi de tes records personnels.">
+<meta name="twitter:image" content="https://sportifhybride.com/assets/hero.webp">
+</head><body><header class="top"><nav class="nav wrap"><a class="brand" href="index.html"><img src="assets/logo.webp" alt="Logo Hybride Coaching"><span>HYBRIDE COACHING<small>by Victor Castillo</small></span></a><div class="links"><a href="programmes.html">Programmes</a><a href="avis.html">Avis</a><a href="resultats.html">Résultats</a><a href="parcours.html">Mon parcours</a><a href="outils.html">Outils</a><a href="espace.html">Mon espace</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a></div><span class="lang"></span><button class="menu" aria-label="Ouvrir le menu">☰</button></nav></header>
+<main class="wrap legal-page" style="max-width:1000px">
+<div class="eyebrow">OUTILS GRATUITS</div><h1 style="font-size:clamp(38px,6vw,64px)">CALCULATEURS</h1>
+<p class="muted" style="max-width:680px">Tous les resultats sont des estimations. Ils ne remplacent ni une evaluation individuelle, ni un test physiologique encadre.</p>
+
+<div class="tools" style="margin-top:30px">
+  <div class="tool">
+    <h3>Charge de travail — de 1 à 20 répétitions</h3>
+    <p class="hint muted" style="font-size:13.5px;margin:0 0 10px">Donne une charge et le nombre de répétitions réalisées. Le tableau estime ton 1RM, puis la charge de travail pour chaque nombre de répétitions, avec la plage de pourcentage conseillée.</p>
+    <label for="rmWeight">Charge soulevée (kg)</label><input id="rmWeight" type="number" min="1" step="0.5">
+    <label for="rmReps">Répétitions réalisées (1 à 20)</label><input id="rmReps" type="number" min="1" max="20">
+    <div class="buttons"><button class="btn" id="rmBtn" type="button">CALCULER</button></div>
+    <div class="result" id="rmOut"></div>
+    <div id="rmTable"></div>
+  </div>
+
+  <div class="tool">
+    <h3>Zones d'entraînement à partir de tes chronos</h3>
+    <p class="hint muted" style="font-size:13.5px;margin:0 0 10px">Ajoute un ou plusieurs chronos récents, avec la distance et la période. Plus tu en donnes, plus l'estimation est fiable.</p>
+    <div class="perfrow">
+      <select id="perfDist">
+        <option value="1">1 km</option><option value="1.5">1 500 m</option><option value="3" selected>3 000 m</option>
+        <option value="5">5 km</option><option value="10">10 km</option><option value="21.1">Semi-marathon</option><option value="42.195">Marathon</option>
+      </select>
+      <input id="perfTime" placeholder="hh:mm:ss ou mm:ss">
+      <select id="perfWhen">
+        <option value="0">Moins de 3 semaines</option>
+        <option value="1">1 à 3 mois</option>
+        <option value="2">Plus de 3 mois</option>
+      </select>
+      <button class="btn" id="addPerf" type="button">AJOUTER</button>
+    </div>
+    <div id="perfList" class="perflist"></div>
+    <div class="buttons"><button class="btn" id="zBtn" type="button">CALCULER MES ZONES</button></div>
+    <div class="result" id="zOut" style="font-size:15px;line-height:1.8;font-weight:600"></div>
+  </div>
+</div>
+
+<div class="orders">
+  <div class="head"><h3>Mes records personnels</h3><p class="muted" style="font-size:13.5px;margin:6px 0 0">Enregistres uniquement sur cet appareil, dans ton navigateur. Rien n'est envoye ni publie.</p></div>
+  <div style="padding:20px 22px;display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end">
+    <div><label for="prDist" class="muted" style="display:block;font-size:13px;margin-bottom:5px">Distance ou epreuve</label><input id="prDist" placeholder="5 km, 100 m, squat..."></div>
+    <div><label for="prTime" class="muted" style="display:block;font-size:13px;margin-bottom:5px">Performance</label><input id="prTime" placeholder="22:14 ou 120 kg"></div>
+    <button class="btn" id="prAdd" type="button">ENREGISTRER</button>
+  </div>
+  <table><thead><tr><th>Epreuve</th><th>Performance</th><th>Date</th><th></th></tr></thead><tbody id="prBody"></tbody></table>
+</div>
+
+<section class="partner">
+  <div class="eyebrow">PARTENAIRE</div>
+  <h2>Qwik VBT</h2>
+  <p>Une application qui mesure la vitesse et la trajectoire de ta barre pendant tes séries de musculation, directement depuis ton téléphone. Utile pour suivre tes charges et ta progression.</p>
+  <div class="buttons">
+    <a class="btn" target="_blank" rel="noopener" href="https://apps.apple.com/us/app/qwik-vbt/id1660094818">TÉLÉCHARGER SUR L'APP STORE</a>
+    <a class="btn alt" target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.zopfi.qwik_vbt">TÉLÉCHARGER SUR GOOGLE PLAY</a>
+  </div>
+  <p class="notice">Partenariat : je suis en collaboration avec Qwik VBT et je peux percevoir une commission sur les abonnements.</p>
+</section>
+</main><footer class="footer"><div class="wrap footer-row"><div><b>HYBRIDE COACHING</b><br>© 2026 Victor Castillo</div><div class="legal"><a href="mentions-legales.html">Mentions légales</a><a href="cgv.html">CGV</a><a href="confidentialite.html">Confidentialité</a><a href="cookies.html">Cookies</a></div><div class="socials"><a href="https://www.instagram.com/sportifhybride" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@sportifhybride" target="_blank" rel="noopener">TikTok</a><a href="https://www.youtube.com/@victor800m" target="_blank" rel="noopener">YouTube</a></div></div></footer><div class="cookie"><b>Respect de ta vie privée</b><div>Ce site utilise uniquement les cookies nécessaires pour le moment.</div><div class="cookie-actions"><button class="ok" data-cookie="necessary">Accepter</button><button data-cookie="refused">Refuser</button></div></div><script src="script.js"></script></body></html>

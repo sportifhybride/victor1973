@@ -1,0 +1,8 @@
+name = "sportifhybride"
+pages_build_output_dir = "site"
+compatibility_date = "2026-11-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "hybride-coaching"
+database_id = "d92039d6-098c-4803-86b4-8add977adbd4"
